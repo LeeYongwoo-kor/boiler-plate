@@ -1,5 +1,5 @@
 {
-  "name": "login",
+  "name": "billians",
   "version": "0.1.0",
   "private": true,
   "scripts": {
@@ -12,7 +12,7 @@
     "@prisma/client": "^4.4.0",
     "@tailwindcss/forms": "^0.5.2",
     "next": "12.1.6",
-    "next-auth": "^4.12.0",
+    "next-auth": "^4.3.3",
     "react": "18.2.0",
     "react-dom": "18.2.0",
     "react-hook-form": "^7.36.0"

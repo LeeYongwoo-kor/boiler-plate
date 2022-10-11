@@ -1,6 +1,11 @@
-# Practice
+# boiler-plate-login
 
-## 1. Intial Settings
+## 1. git clone Settings
+
+> 1. npm install
+> 2. npm i next-auth@4.3.3
+
+## 2. Intial Settings
 
 ---
 
