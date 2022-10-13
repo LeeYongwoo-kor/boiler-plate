@@ -1,14 +1,13 @@
 import { NextPage } from "next";
-import {useRouter} from "next/router";
-
-import SocialLogin from "./components/socialLogin";
+import { useRouter } from "next/router";
+import { useEffect } from "react";
 
 const Home: NextPage = () => {
   const router = useRouter();
-  router.push("/");
-  return (
-    <main></main>
-  );
+  useEffect(() => {
+    router.push("/login");
+  }, []);
+  return <main></main>;
 };
 
 export default Home;
