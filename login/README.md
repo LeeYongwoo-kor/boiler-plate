@@ -37,4 +37,9 @@
 >
 > > npm install next-auth
 
+> NextAuth + Prisma
+>
+> > npm install next-auth @prisma/client @next-auth/prisma-adapter
+> > npm install prisma --save-dev
+
 ---

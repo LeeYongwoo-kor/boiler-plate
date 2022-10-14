@@ -1,8 +1,8 @@
 import { NextPage } from "next";
-import SocialLogin from "./components/socialLogin";
+import SocialLogin from "../components/socialLogin";
 
 const Enter: NextPage = () => {
-  return <SocialLogin />
+  return <SocialLogin />;
 };
 
 export default Enter;
