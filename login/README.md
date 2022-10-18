@@ -42,4 +42,9 @@
 > > npm install next-auth @prisma/client @next-auth/prisma-adapter
 > > npm install prisma --save-dev
 
+> NextAuth + Email(sendgrid)
+>
+> > npm i nodemailer
+> > npm install --save @sendgrid/mail
+
 ---
