@@ -1,7 +1,14 @@
 import { signIn, signOut, useSession } from "next-auth/react";
+import { useForm } from "react-hook-form";
+
+interface IEmail {
+  email: string;
+}
 
 export default function SocialLogin() {
+  const { register, handleSubmit } = useForm<IEmail>();
   const { data: session } = useSession();
+  const onValid = ({ email }: IEmail) => signIn("email", { email });
   if (session) {
     console.log(session);
     return (
@@ -14,6 +21,16 @@ export default function SocialLogin() {
   return (
     <>
       Not signed in <br />
+      <form onSubmit={handleSubmit(onValid)}>
+        <div>
+          <input
+            {...register("email", { required: "Write your email please" })}
+            type="email"
+            placeholder="Please input email address"
+          />
+          <button>Email Login</button>
+        </div>
+      </form>
       <div>
         <button onClick={() => signIn("google")}>Google in</button>
       </div>
