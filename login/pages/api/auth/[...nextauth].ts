@@ -1,4 +1,4 @@
-import NextAuth from "next-auth";
+import NextAuth, { NextAuthOptions } from "next-auth";
 import GoogleProvider from "next-auth/providers/google";
 import LineProvider from "next-auth/providers/line";
 import EmailProvider from "next-auth/providers/email";
@@ -6,7 +6,7 @@ import { PrismaAdapter } from "@next-auth/prisma-adapter";
 import sgMail from "@sendgrid/mail";
 import prisma from "../../../lib/prismadb";
 
-export const authOptions = {
+export const authOptions: NextAuthOptions = {
   adapter: PrismaAdapter(prisma),
   // Configure one or more authentication providers
   providers: [
@@ -16,13 +16,13 @@ export const authOptions = {
         host: process.env.EMAIL_SERVER_HOST,
         port: process.env.EMAIL_SERVER_PORT,
         auth: {
-          user: process.env.EMAIL_SERVER_USER,
+          user: process.env.EMAIL_SERVER_USERx,
           pass: process.env.EMAIL_SERVER_PASSWORD,
         },
       },
       from: process.env.EMAIL_FROM,
       sendVerificationRequest({ identifier, url }) {
-        sgMail.setApiKey(process.env.SENDGRID_API_KEY);
+        sgMail.setApiKey(process.env.SENDGRID_API_KEY!);
         const msg = {
           to: identifier,
           from: process.env.EMAIL_FROM,
@@ -35,16 +35,16 @@ export const authOptions = {
         sgMail
           .send(msg)
           .then(() => console.log("Email sent!"))
-          .catch((err) => console.err(err));
+          .catch((err) => console.error(err));
       },
     }),
     GoogleProvider({
-      clientId: process.env.GOOGLE_CLIENT_ID,
-      clientSecret: process.env.GOOGLE_CLIENT_SECRET,
+      clientId: process.env.GOOGLE_CLIENT_ID!,
+      clientSecret: process.env.GOOGLE_CLIENT_SECRET!,
     }),
     LineProvider({
-      clientId: process.env.LINE_CLIENT_ID,
-      clientSecret: process.env.LINE_CLIENT_SECRET,
+      clientId: process.env.LINE_CLIENT_ID!,
+      clientSecret: process.env.LINE_CLIENT_SECRET!,
       authorization: {
         params: {
           scope: "profile openid email",
@@ -63,11 +63,14 @@ export const authOptions = {
   ],
   secret: process.env.SECRET,
   session: {
-    // strategy: "jwt",
-    strategy: "database",
+    strategy: "jwt",
+    // strategy: "database",
     maxAge: 30 * 60 * 60 * 24,
     // Note: This option is ignored if using JSON Web Tokens
     updateAge: 60 * 60 * 24,
+  },
+  pages: {
+    signIn: "/auth/login",
   },
 };
 
