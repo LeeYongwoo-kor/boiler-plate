@@ -39,6 +39,7 @@ export const authOptions: NextAuthOptions = {
       },
     }),
     GoogleProvider({
+      checks: "both",
       clientId: process.env.GOOGLE_CLIENT_ID!,
       clientSecret: process.env.GOOGLE_CLIENT_SECRET!,
     }),
@@ -69,9 +70,9 @@ export const authOptions: NextAuthOptions = {
     // Note: This option is ignored if using JSON Web Tokens
     updateAge: 60 * 60 * 24,
   },
-  pages: {
-    signIn: "/auth/login",
-  },
+  // pages: {
+  //   signIn: "/auth/login",
+  // },
 };
 
 export default NextAuth(authOptions);
