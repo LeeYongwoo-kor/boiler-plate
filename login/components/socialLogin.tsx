@@ -8,9 +8,9 @@ interface IEmail {
 export default function SocialLogin() {
   const { register, handleSubmit } = useForm<IEmail>();
   const { data: session } = useSession();
-  const onValid = ({ email }: IEmail) => signIn("email", { email });
+  const onValid = ({ email }: IEmail) =>
+    signIn("email", { email, callbackUrl: "/" });
   if (session) {
-    console.log(session);
     return (
       <>
         Signed in as {session?.user?.email} <br />
@@ -32,10 +32,14 @@ export default function SocialLogin() {
         </div>
       </form>
       <div>
-        <button onClick={() => signIn("google")}>Google in</button>
+        <button onClick={() => signIn("google", { callbackUrl: "/" })}>
+          Google in
+        </button>
       </div>
       <div>
-        <button onClick={() => signIn("line")}>Line in</button>
+        <button onClick={() => signIn("line", { callbackUrl: "/" })}>
+          Line in
+        </button>
       </div>
     </>
   );
